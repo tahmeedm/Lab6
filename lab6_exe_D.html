@@ -33,10 +33,10 @@ Description : API Usage.
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            display: block; 
-            width: max-content; 
-            width: -moz-max-content; 
-            width: -webkit-max-content; 
+            display: block; /* Use block display */
+            width: max-content; /* Width as per content */
+            width: -moz-max-content; /* For Mozilla */
+            width: -webkit-max-content; /* For Webkit */
         }
         li:hover {
             background-color: #ddd;
@@ -46,9 +46,10 @@ Description : API Usage.
         }
     </style>
     <script>
-        
+         // Function to fetch and display students
         async function fetchStudents() {
-            const response = await fetch('https://65dd039ae7edadead7ed4ed3.mockapi.io/students'); // Adjust URL as needed
+
+            const response = await fetch('https://65dd039ae7edadead7ed4ed3.mockapi.io/students'); 
             const students = await response.json();
             const studentList = document.getElementById('studentList');
             studentList.innerHTML = ''; 
@@ -57,11 +58,14 @@ Description : API Usage.
                 li.textContent = student.name; 
                 li.onclick = () => fetchCourses(student.id); 
                 studentList.appendChild(li);
+                
             });
+
         }
 
-        
+        // Function to fetch and display courses for a student
         async function fetchCourses(studentId) {
+
             const response = await fetch(`https://65dd039ae7edadead7ed4ed3.mockapi.io/students/${studentId}/courses`); 
             const courses = await response.json();
             const courseList = document.getElementById('courseList');
@@ -71,10 +75,11 @@ Description : API Usage.
                 
                 li.textContent = `${course.name} (Units: ${course.unit})`; 
                 courseList.appendChild(li);
+
             });
         }
         
-       
+        // Fetch students on window load
         window.onload = fetchStudents;
     </script>
 </head>
