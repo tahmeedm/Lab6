@@ -44,8 +44,10 @@ Description : API Usage.
         #studentList, #courseList {
             width: 40%;
         }
+        
     </style>
     <script>
+
          // Function to fetch and display students
         async function fetchStudents() {
 
@@ -53,12 +55,14 @@ Description : API Usage.
             const students = await response.json();
             const studentList = document.getElementById('studentList');
             studentList.innerHTML = ''; 
+
             students.forEach(student => {
                 const li = document.createElement('li');
                 li.textContent = student.name; 
+
                 li.onclick = () => fetchCourses(student.id); 
                 studentList.appendChild(li);
-                
+
             });
 
         }
@@ -70,10 +74,11 @@ Description : API Usage.
             const courses = await response.json();
             const courseList = document.getElementById('courseList');
             courseList.innerHTML = ''; 
+
             courses.forEach(course => {
                 const li = document.createElement('li');
-                
                 li.textContent = `${course.name} (Units: ${course.unit})`; 
+
                 courseList.appendChild(li);
 
             });
@@ -81,6 +86,7 @@ Description : API Usage.
         
         // Fetch students on window load
         window.onload = fetchStudents;
+
     </script>
 </head>
 <body>
